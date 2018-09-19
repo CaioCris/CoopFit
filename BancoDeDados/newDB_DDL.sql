@@ -62,15 +62,11 @@ CREATE TABLE IF NOT EXISTS `coopfit`.`t_dispositivo_sensor` (
   `data` DATETIME NOT NULL,
   `tipo` VARCHAR(255) NOT NULL,
   `valor` DOUBLE NOT NULL,
-  `id_dispositivo` BIGINT(20) NULL DEFAULT NULL,
-  `cd_pessoa` BIGINT(20) NULL DEFAULT NULL,
-  `t_pessoa_cd_pessoa` BIGINT(20) NOT NULL,
-  `t_dispositivo_id_dispositivo` BIGINT(20) NOT NULL,
+  `cd_pessoa` BIGINT(20) NOT NULL,
+  `id_dispositivo` BIGINT(20) NOT NULL,
   PRIMARY KEY (`id_dispositivo_sensor`),
-  INDEX `FKe0dywcodl5vn1rqe3qiqtcoe` (`id_dispositivo` ASC),
-  INDEX `FK9ep67i8xouxs6sgymokwc2jkj` (`cd_pessoa` ASC),
-  INDEX `fk_t_dispositivo_sensor_t_pessoa1_idx` (`t_pessoa_cd_pessoa` ASC),
-  INDEX `fk_t_dispositivo_sensor_t_dispositivo1_idx` (`t_dispositivo_id_dispositivo` ASC))
+  INDEX `fk_t_dispositivo_sensor_t_pessoa1_idx` (`cd_pessoa` ASC),
+  INDEX `fk_t_dispositivo_sensor_t_dispositivo1_idx` (`id_dispositivo` ASC))
 ENGINE = MyISAM
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
@@ -83,11 +79,9 @@ CREATE TABLE IF NOT EXISTS `coopfit`.`t_informativo_saude` (
   `id_informacao_saude` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `data` DATETIME NOT NULL,
   `descricao` VARCHAR(255) NOT NULL,
-  `cd_pessoa` BIGINT(20) NULL DEFAULT NULL,
-  `t_pessoa_cd_pessoa` BIGINT(20) NOT NULL,
-  PRIMARY KEY (`id_informacao_saude`, `t_pessoa_cd_pessoa`),
-  INDEX `FK5mlqey0522rrf7gj4axdnsxr6` (`cd_pessoa` ASC),
-  INDEX `fk_t_informativo_saude_t_pessoa1_idx` (`t_pessoa_cd_pessoa` ASC))
+  `cd_pessoa` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`id_informacao_saude`),
+  INDEX `fk_t_informativo_saude_t_pessoa1_idx` (`cd_pessoa` ASC))
 ENGINE = MyISAM
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
@@ -100,11 +94,9 @@ CREATE TABLE IF NOT EXISTS `coopfit`.`t_informe_tratativas` (
   `id_informativo` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `data` DATETIME NOT NULL,
   `descricao` VARCHAR(255) NOT NULL,
-  `cd_pessoa` BIGINT(20) NULL DEFAULT NULL,
-  `t_pessoa_cd_pessoa` BIGINT(20) NOT NULL,
-  PRIMARY KEY (`id_informativo`, `t_pessoa_cd_pessoa`),
-  INDEX `FKikatiqn4210kcvkwoaymr60r4` (`cd_pessoa` ASC),
-  INDEX `fk_t_informe_tratativas_t_pessoa_idx` (`t_pessoa_cd_pessoa` ASC))
+  `cd_pessoa` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`id_informativo`),
+  INDEX `fk_t_informe_tratativas_t_pessoa_idx` (`cd_pessoa` ASC))
 ENGINE = MyISAM
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
@@ -117,11 +109,9 @@ CREATE TABLE IF NOT EXISTS `coopfit`.`t_notificacao` (
   `id_notificacao` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `data` DATETIME NOT NULL,
   `descricao` VARCHAR(255) NOT NULL,
-  `cd_pessoa` BIGINT(20) NULL DEFAULT NULL,
-  `t_pessoa_cd_pessoa` BIGINT(20) NOT NULL,
-  PRIMARY KEY (`id_notificacao`, `t_pessoa_cd_pessoa`),
-  INDEX `FK82t6309fqhyprt0e3mblin3na` (`cd_pessoa` ASC),
-  INDEX `fk_t_notificacao_t_pessoa1_idx` (`t_pessoa_cd_pessoa` ASC))
+  `cd_pessoa` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`id_notificacao`),
+  INDEX `fk_t_notificacao_t_pessoa1_idx` (`cd_pessoa` ASC))
 ENGINE = MyISAM
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
@@ -131,11 +121,8 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `coopfit`.`t_perfis`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `coopfit`.`t_perfis` (
-  `pessoa_cd_pessoa` BIGINT(20) NOT NULL,
   `perfis` INT(11) NULL DEFAULT NULL,
-  `t_pessoa_cd_pessoa` BIGINT(20) NOT NULL,
-  INDEX `FKtq4dcrypyuqrrxuu74xdwh7ky` (`pessoa_cd_pessoa` ASC),
-  PRIMARY KEY (`t_pessoa_cd_pessoa`))
+  `pessoa_cd_pessoa` BIGINT(20) NOT NULL)
 ENGINE = MyISAM
 DEFAULT CHARACTER SET = latin1;
 
@@ -149,11 +136,9 @@ CREATE TABLE IF NOT EXISTS `coopfit`.`t_questionario` (
   `qt_estresse` INT(11) NULL DEFAULT NULL,
   `qt_copo_agua` INT(11) NULL DEFAULT NULL,
   `tp_sentimento` VARCHAR(255) NULL DEFAULT NULL,
-  `cd_pessoa` BIGINT(20) NULL DEFAULT NULL,
-  `t_pessoa_cd_pessoa` BIGINT(20) NOT NULL,
-  PRIMARY KEY (`id_questionario`, `t_pessoa_cd_pessoa`),
-  INDEX `FK1wpkehha8jvt5cosdr5yqbj7a` (`cd_pessoa` ASC),
-  INDEX `fk_t_questionario_t_pessoa1_idx` (`t_pessoa_cd_pessoa` ASC))
+  `cd_pessoa` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`id_questionario`),
+  INDEX `fk_t_questionario_t_pessoa1_idx` (`cd_pessoa` ASC))
 ENGINE = MyISAM
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
@@ -167,11 +152,9 @@ CREATE TABLE IF NOT EXISTS `coopfit`.`t_rotina` (
   `data` DATETIME NOT NULL,
   `descricao` VARCHAR(255) NOT NULL,
   `tipo` INT(11) NOT NULL,
-  `cd_pessoa` BIGINT(20) NULL DEFAULT NULL,
-  `t_pessoa_cd_pessoa` BIGINT(20) NOT NULL,
-  PRIMARY KEY (`id_rotina`, `t_pessoa_cd_pessoa`),
-  INDEX `FKkqdfl9hwv9v6h7aer0p9kfr0v` (`cd_pessoa` ASC),
-  INDEX `fk_t_rotina_t_pessoa1_idx` (`t_pessoa_cd_pessoa` ASC))
+  `cd_pessoa` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`id_rotina`),
+  INDEX `fk_t_rotina_t_pessoa1_idx` (`cd_pessoa` ASC))
 ENGINE = MyISAM
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;

@@ -59,7 +59,10 @@ public class DBService {
 		Pessoa p1 = new Pessoa("Caio", sdf.parse("01/09/1993 00:00"), Genero.MASCULINO, "caiohcris@gmail.com",
 				pe.encode("123456"), sdf.parse("11/08/2018 23:46"), sdf.parse("12/08/2018 20:45"), false, 1.73, 78.5,
 				"Não tenho Observações");
+		p1.setId((long) 0);
 		p1.addPerfil(TipoUsuario.ADMINISTRADOR);
+		
+		
 
 		InformeTratativo info1 = new InformeTratativo("Informativo", sdf.parse("11/08/2018 23:46"), p1);
 		Notificacao not1 = new Notificacao("Notificacao", sdf.parse("11/08/2018 23:46"), p1);
