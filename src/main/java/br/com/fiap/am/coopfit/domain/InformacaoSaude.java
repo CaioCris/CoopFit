@@ -20,7 +20,7 @@ public class InformacaoSaude implements Serializable {
 	@Id
 	@Column(name = "id_informacao_saude")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@Column(name = "descricao", nullable = false)
 	private String descricao;
@@ -43,7 +43,7 @@ public class InformacaoSaude implements Serializable {
 		this.pessoa = pessoa;
 	}
 
-	public InformacaoSaude(long id, String descricao, Date data, Pessoa pessoa) {
+	public InformacaoSaude(Long id, String descricao, Date data, Pessoa pessoa) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -51,11 +51,11 @@ public class InformacaoSaude implements Serializable {
 		this.pessoa = pessoa;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

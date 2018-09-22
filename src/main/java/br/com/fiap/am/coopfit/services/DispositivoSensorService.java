@@ -22,6 +22,12 @@ public class DispositivoSensorService {
 	
 	@Autowired
 	private DispositivoSensorRepository repo;
+	
+	@Autowired
+	private PessoaService pessoaService;
+	
+	@Autowired
+	private DispositivoService dispositivoService;
 
 	public DispositivoSensor find(Long id) {
 		Optional<DispositivoSensor> obj = repo.findById(id);
@@ -32,6 +38,8 @@ public class DispositivoSensorService {
 	@Transactional
 	public DispositivoSensor insert(DispositivoSensor obj) {
 		obj.setId(null);
+		obj.setPessoa(pessoaService.find(obj.getPessoa().getId()));
+		obj.setDispositivo(dispositivoService.find(obj.getDispositivo().getId()));
 		return repo.save(obj);
 	}
 

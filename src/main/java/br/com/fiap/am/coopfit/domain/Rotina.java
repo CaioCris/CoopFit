@@ -22,7 +22,7 @@ public class Rotina implements Serializable {
 	@Id
 	@Column(name = "id_rotina")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@Column(name = "descricao", nullable = false)
 	private String descricao;
@@ -49,7 +49,7 @@ public class Rotina implements Serializable {
 		this.pessoa = pessoa;
 	}
 
-	public Rotina(long id, String descricao, Date data, TipoRotina tipo, Pessoa pessoa) {
+	public Rotina(Long id, String descricao, Date data, TipoRotina tipo, Pessoa pessoa) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -58,11 +58,11 @@ public class Rotina implements Serializable {
 		this.pessoa = pessoa;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -22,7 +22,7 @@ public class Dispositivo implements Serializable {
 	@Id
 	@Column(name = "id_dispositivo")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@Column(name = "descricao", nullable = false)
 	private String descricao;
@@ -44,18 +44,18 @@ public class Dispositivo implements Serializable {
 		this.pessoa = pessoa;
 	}
 
-	public Dispositivo(long id, String descricao, Pessoa pessoa) {
+	public Dispositivo(Long id, String descricao, Pessoa pessoa) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.pessoa = pessoa;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

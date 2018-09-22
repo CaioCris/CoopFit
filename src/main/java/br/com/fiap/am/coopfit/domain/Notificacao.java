@@ -20,7 +20,7 @@ public class Notificacao implements Serializable {
 	@Id
 	@Column(name = "id_notificacao")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@Column(name = "descricao", nullable = false)
 	private String descricao;
@@ -43,7 +43,7 @@ public class Notificacao implements Serializable {
 		this.pessoa = pessoa;
 	}
 
-	public Notificacao(long id, String descricao, Date data, Pessoa pessoa) {
+	public Notificacao(Long id, String descricao, Date data, Pessoa pessoa) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -51,11 +51,11 @@ public class Notificacao implements Serializable {
 		this.pessoa = pessoa;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
