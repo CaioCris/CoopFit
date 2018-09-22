@@ -92,7 +92,7 @@ public class Pessoa implements Serializable {
 
 	public Pessoa() {
 		super();
-		addPerfil(TipoUsuario.PACIENTE);
+		addPerfil(TipoUsuario.ADMINISTRADOR);
 	}
 
 	public Pessoa(Long id, String nome, String email) {
@@ -117,7 +117,7 @@ public class Pessoa implements Serializable {
 		this.altura = altura;
 		this.peso = peso;
 		this.observacao = observacao;
-		addPerfil(TipoUsuario.PACIENTE);
+		addPerfil(TipoUsuario.ADMINISTRADOR);
 	}
 
 	public Pessoa(String nome, Date nascimento, Genero genero, String email, String senha,
@@ -134,7 +134,7 @@ public class Pessoa implements Serializable {
 		this.altura = altura;
 		this.peso = peso;
 		this.observacao = observacao;
-		addPerfil(TipoUsuario.PACIENTE);
+		addPerfil(TipoUsuario.ADMINISTRADOR);
 	}
 
 	public Pessoa(Long id, String nome, Date nascimento, Genero genero, String email, String senha, Date cadastro,
@@ -152,7 +152,7 @@ public class Pessoa implements Serializable {
 		this.altura = altura;
 		this.peso = peso;
 		this.observacao = observacao;
-		addPerfil(TipoUsuario.PACIENTE);
+		addPerfil(TipoUsuario.ADMINISTRADOR);
 	}
 
 	public Pessoa(Long id, String nome, Date nascimento, Integer genero, byte[] foto, String email, String senha,
@@ -172,7 +172,7 @@ public class Pessoa implements Serializable {
 		this.altura = altura;
 		this.peso = peso;
 		this.observacao = observacao;
-		addPerfil(TipoUsuario.PACIENTE);
+		addPerfil(TipoUsuario.ADMINISTRADOR);
 	}
 
 	public Long getId() {
