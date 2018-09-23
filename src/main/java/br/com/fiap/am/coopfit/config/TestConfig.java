@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 
 import br.com.fiap.am.coopfit.services.DBService;
 import br.com.fiap.am.coopfit.services.EmailService;
-import br.com.fiap.am.coopfit.services.MockEmailService;
+import br.com.fiap.am.coopfit.services.SmtpEmailService;
 
 @Configuration
 @Profile("test")
@@ -27,7 +27,7 @@ public class TestConfig {
 	
 	@Bean
 	public EmailService emailService() {
-		return new MockEmailService();
-		//return new SmtpEmailService();
+		//return new MockEmailService();
+		return new SmtpEmailService();
 	}
 }

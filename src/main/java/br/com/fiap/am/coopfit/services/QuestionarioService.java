@@ -42,7 +42,7 @@ public class QuestionarioService {
 	public Questionario insert(Questionario obj) {
 		obj.setId(null);
 		obj.setPessoa(pessoaService.find(obj.getPessoa().getId()));
-		emailService.sendQuationarioConfirmationEmail(obj);
+		emailService.sendQuestionarioConfirmationHtmlEmail(obj);
 		return repo.save(obj);
 	}
 
