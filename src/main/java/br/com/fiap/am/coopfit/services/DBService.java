@@ -76,7 +76,7 @@ public class DBService {
 		p1.getRotinas().addAll(Arrays.asList(rot1));
 		p1.getInformacoesSaude().addAll(Arrays.asList(infoS1));
 		p1.getQuestionarios().addAll(Arrays.asList(que1));
-		p1.setDispositivo(dis1);
+		p1.getDispositivos().addAll(Arrays.asList(dis1));
 		p1.getDispositivoSensores().addAll(Arrays.asList(disSe1));
 		dis1.getDispositivoSensores().addAll(Arrays.asList(disSe1));
 
