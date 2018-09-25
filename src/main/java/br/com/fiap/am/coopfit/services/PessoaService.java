@@ -28,10 +28,10 @@ public class PessoaService {
 
 	public Pessoa find(Long id) {
 		
-		UserSS user = UserService.authenticated();
-		if( user==null || !user.hasRole(TipoUsuario.ADMINISTRADOR) && !id.equals(user.getId())) {
-			throw new AuthorizationException("Acesso negado");
-		}
+//		UserSS user = UserService.authenticated();
+//		if( user==null || !user.hasRole(TipoUsuario.ADMINISTRADOR) && !id.equals(user.getId())) {
+//			throw new AuthorizationException("Acesso negado");
+//		}
 		
 		Optional<Pessoa> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
