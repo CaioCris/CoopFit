@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "T_DISPOSITIVO")
 public class Dispositivo implements Serializable {
@@ -27,6 +29,7 @@ public class Dispositivo implements Serializable {
 	@Column(name = "descricao", nullable = false)
 	private String descricao;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cd_pessoa")
 	private Pessoa pessoa;
