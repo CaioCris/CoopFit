@@ -1,4 +1,4 @@
-package br.com.fiap.am.coopfit.resource;
+package br.com.fiap.am.coopfit.resources;
 
 import java.net.URI;
 import java.util.List;
@@ -14,25 +14,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.fiap.am.coopfit.domain.InformacaoSaude;
-import br.com.fiap.am.coopfit.services.InformacaoSaudeService;
+import br.com.fiap.am.coopfit.domain.Rotina;
+import br.com.fiap.am.coopfit.services.RotinaService;
 
 @RestController
-@RequestMapping(value="/informacoes_saude")
-public class InformacaoSaudeResource {
+@RequestMapping(value="/rotinas")
+public class RotinaResource {
 
 	
 	@Autowired
-	private InformacaoSaudeService service;
+	private RotinaService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<InformacaoSaude> find(@PathVariable Long id) {
-		InformacaoSaude obj = service.find(id);
+	public ResponseEntity<Rotina> find(@PathVariable Long id) {
+		Rotina obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody InformacaoSaude obj){
+	public ResponseEntity<Void> insert(@RequestBody Rotina obj){
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -40,7 +40,7 @@ public class InformacaoSaudeResource {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody InformacaoSaude obj){
+	public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Rotina obj){
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
@@ -53,20 +53,20 @@ public class InformacaoSaudeResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<InformacaoSaude>> findAll() {
-		List<InformacaoSaude> list = service.findAll();
-		//List<InformacaoSaudeDTO> listDTO = list.stream().map(obj -> new InformacaoSaudeDTO(obj)).collect(Collectors.toList());
+	public ResponseEntity<List<Rotina>> findAll() {
+		List<Rotina> list = service.findAll();
+		//List<RotinaDTO> listDTO = list.stream().map(obj -> new RotinaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(list);
 	}	
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
-	public ResponseEntity<Page<InformacaoSaude>> findPage(
+	public ResponseEntity<Page<Rotina>> findPage(
 			@ RequestParam(value="page", defaultValue="0") Integer page, 
 			@ RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
 			@ RequestParam(value="orderBy", defaultValue="instante") String orderBy, 
 			@ RequestParam(value="direction", defaultValue="DESC") String direction) {
-		Page<InformacaoSaude> list = service.findPage(page, linesPerPage, orderBy, direction);
-		//Page<InformacaoSaudeDTO> listDTO = list.map(obj -> new InformacaoSaudeDTO(obj));
+		Page<Rotina> list = service.findPage(page, linesPerPage, orderBy, direction);
+		//Page<RotinaDTO> listDTO = list.map(obj -> new RotinaDTO(obj));
 		return ResponseEntity.ok().body(list);
 	}	
 	

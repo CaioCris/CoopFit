@@ -1,13 +1,11 @@
-package br.com.fiap.am.coopfit.resource;
+package br.com.fiap.am.coopfit.resources;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,26 +14,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.fiap.am.coopfit.domain.Pessoa;
-import br.com.fiap.am.coopfit.dto.PessoaDTO;
-import br.com.fiap.am.coopfit.services.PessoaService;
+import br.com.fiap.am.coopfit.domain.InformeTratativo;
+import br.com.fiap.am.coopfit.services.InformeTratativoService;
 
 @RestController
-@RequestMapping(value="/pessoas")
-public class PessoaResource {
+@RequestMapping(value="/tratativas")
+public class InformeTratativoResource {
 
 	
 	@Autowired
-	private PessoaService service;
+	private InformeTratativoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Pessoa> find(@PathVariable Long id) {
-		Pessoa obj = service.find(id);
+	public ResponseEntity<InformeTratativo> find(@PathVariable Long id) {
+		InformeTratativo obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Pessoa obj){
+	public ResponseEntity<Void> insert(@RequestBody InformeTratativo obj){
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -43,37 +40,34 @@ public class PessoaResource {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Pessoa obj){
+	public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody InformeTratativo obj){
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<PessoaDTO>> findAll() {
-		List<Pessoa> list = service.findAll();
-		List<PessoaDTO> listDTO = list.stream().map(obj -> new PessoaDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDTO);
+	public ResponseEntity<List<InformeTratativo>> findAll() {
+		List<InformeTratativo> list = service.findAll();
+		//List<InformeTratativoDTO> listDTO = list.stream().map(obj -> new InformeTratativoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(list);
 	}	
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
 	@RequestMapping(value="/page", method=RequestMethod.GET)
-	public ResponseEntity<Page<PessoaDTO>> findPage(
+	public ResponseEntity<Page<InformeTratativo>> findPage(
 			@ RequestParam(value="page", defaultValue="0") Integer page, 
 			@ RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
-			@ RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
-			@ RequestParam(value="direction", defaultValue="ASC") String direction) {
-		Page<Pessoa> list = service.findPage(page, linesPerPage, orderBy, direction);
-		Page<PessoaDTO> listDTO = list.map(obj -> new PessoaDTO(obj));
-		return ResponseEntity.ok().body(listDTO);
+			@ RequestParam(value="orderBy", defaultValue="instante") String orderBy, 
+			@ RequestParam(value="direction", defaultValue="DESC") String direction) {
+		Page<InformeTratativo> list = service.findPage(page, linesPerPage, orderBy, direction);
+		//Page<InformeTratativoDTO> listDTO = list.map(obj -> new InformeTratativoDTO(obj));
+		return ResponseEntity.ok().body(list);
 	}	
 	
 }

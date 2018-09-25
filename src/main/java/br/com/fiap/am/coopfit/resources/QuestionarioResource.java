@@ -1,4 +1,4 @@
-package br.com.fiap.am.coopfit.resource;
+package br.com.fiap.am.coopfit.resources;
 
 import java.net.URI;
 import java.util.List;
