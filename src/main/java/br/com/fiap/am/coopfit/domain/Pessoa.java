@@ -16,6 +16,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -83,9 +85,8 @@ public class Pessoa implements Serializable {
 	@OneToMany(mappedBy = "pessoa")
 	private List<Questionario> questionarios = new ArrayList<>();
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa")
-	private List<Dispositivo> dispositivos = new ArrayList<>();
+	private Dispositivo dispositivo;
 
 	@OneToMany(mappedBy = "pessoa")
 	private List<DispositivoSensor> dispositivoSensores = new ArrayList<>();
@@ -319,12 +320,12 @@ public class Pessoa implements Serializable {
 		this.questionarios = questionarios;
 	}
 
-	public List<Dispositivo> getDispositivos() {
-		return dispositivos;
+	public Dispositivo getDispositivo() {
+		return dispositivo;
 	}
 
-	public void setDispositivos(List<Dispositivo> dispositivos) {
-		this.dispositivos = dispositivos;
+	public void setDispositivo(Dispositivo dispositivo) {
+		this.dispositivo = dispositivo;
 	}
 
 	public List<DispositivoSensor> getDispositivoSensores() {
