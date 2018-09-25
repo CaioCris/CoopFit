@@ -83,9 +83,10 @@ public class Pessoa implements Serializable {
 	@OneToMany(mappedBy = "pessoa")
 	private List<Questionario> questionarios = new ArrayList<>();
 
-	@OneToMany(mappedBy = "pessoa")
-	private List<Dispositivo> dispositivos = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "pessoa")
+	private Dispositivo dispositivo;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa")
 	private List<DispositivoSensor> dispositivoSensores = new ArrayList<>();
@@ -319,14 +320,23 @@ public class Pessoa implements Serializable {
 		this.questionarios = questionarios;
 	}
 
-	public List<Dispositivo> getDispositivos() {
-		return dispositivos;
+//	public Dispositivo getDispositivos() {
+//		return dispositivos;
+//	}
+//
+//	public void setDispositivos(List<Dispositivo> dispositivos) {
+//		this.dispositivos = dispositivos;
+//	}
+
+
+	public Dispositivo getDispositivo() {
+		return dispositivo;
 	}
 
-	public void setDispositivos(List<Dispositivo> dispositivos) {
-		this.dispositivos = dispositivos;
+	public void setDispositivo(Dispositivo dispositivo) {
+		this.dispositivo = dispositivo;
 	}
-
+	
 	public List<DispositivoSensor> getDispositivoSensores() {
 		return dispositivoSensores;
 	}
