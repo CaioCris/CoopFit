@@ -20,6 +20,7 @@ import br.com.fiap.am.coopfit.domain.Pessoa;
 import br.com.fiap.am.coopfit.dto.PessoaDTO;
 import br.com.fiap.am.coopfit.services.PessoaService;
 
+//Voltar a Autenticação
 @RestController
 @RequestMapping(value="/pessoas")
 public class PessoaResource {
