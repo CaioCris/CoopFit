@@ -49,14 +49,14 @@ public class PessoaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
+	//@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
+	//@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<PessoaDTO>> findAll() {
 		List<Pessoa> list = service.findAll();
@@ -64,7 +64,7 @@ public class PessoaResource {
 		return ResponseEntity.ok().body(listDTO);
 	}	
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
+	//@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<PessoaDTO>> findPage(
 			@ RequestParam(value="page", defaultValue="0") Integer page, 
