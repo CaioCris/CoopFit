@@ -46,7 +46,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**",
 				"/swagger-ui.html", "/webjars/**"
-				//Enquanto JWT android não está 100%
 				,"/h2-console/**","/sensores/**", "/questionarios/**", "/pessoas/**", 
 				"/rotinas/**", "/notificacoes/**", "/tratativas/**", 
 				"/informacoes_saude/**", "/dispositivos/**",  "/auth/forgot/**");
