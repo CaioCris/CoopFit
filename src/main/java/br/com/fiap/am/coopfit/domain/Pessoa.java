@@ -43,7 +43,7 @@ public class Pessoa implements Serializable {
 	private byte[] foto;
 	@Column(name = "email", nullable = false)
 	private String email;
-	@JsonIgnore
+//	@JsonIgnore
 	@Column(name = "senha", nullable = false)
 	private String senha;
 	@Column(name = "dt_cadastro", nullable = false)

@@ -68,7 +68,7 @@ public class DBService {
 		Rotina rot1 = new Rotina("Rotina", sdf.parse("11/08/2018 23:46"), TipoRotina.ATIVO, p1);
 		InformacaoSaude infoS1 = new InformacaoSaude("Informarcao Saude", sdf.parse("11/08/2018 23:46"), p1);
 		Questionario que1 = new Questionario(2, TipoSentimento.ALEGRIA, 3, sdf.parse("11/08/2018 23:46"), p1);
-		Dispositivo dis1 = new Dispositivo("Dispositivo", p1);
+		Dispositivo dis1 = new Dispositivo("Miband2", p1);
 		DispositivoSensor disSe1 = new DispositivoSensor(0.0, TipoSensor.SONO, sdf.parse("11/08/2018 23:46"), dis1, p1);
 
 		p1.getInformativos().addAll(Arrays.asList(info1));

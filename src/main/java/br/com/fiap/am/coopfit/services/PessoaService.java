@@ -42,6 +42,7 @@ public class PessoaService {
 	@Transactional
 	public Pessoa insert(Pessoa obj) {
 		obj.setId(null);
+		obj.setSenha(obj.getSenha());
 		return repo.save(obj);
 	}
 
