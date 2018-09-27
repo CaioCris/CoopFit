@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.fiap.am.coopfit.domain.Dispositivo;
-import br.com.fiap.am.coopfit.domain.enums.TipoUsuario;
 import br.com.fiap.am.coopfit.repositories.DispositivoRepository;
-import br.com.fiap.am.coopfit.security.UserSS;
-import br.com.fiap.am.coopfit.services.exception.AuthorizationException;
 import br.com.fiap.am.coopfit.services.exception.DataIntegrityException;
 import br.com.fiap.am.coopfit.services.exception.ObjectNotFoundException;
 
