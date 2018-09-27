@@ -21,7 +21,7 @@ public class PessoaNewDTO implements Serializable {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	@Email(message = "Email não valido - Sintatico")
 	private String email;
-	
+
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String senha;
 
@@ -66,5 +66,4 @@ public class PessoaNewDTO implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
 }

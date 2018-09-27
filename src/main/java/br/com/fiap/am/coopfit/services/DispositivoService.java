@@ -24,10 +24,10 @@ public class DispositivoService {
 
 	public Dispositivo find(Long id) {
 		
-		UserSS user = UserService.authenticated();
-		if( user==null || !user.hasRole(TipoUsuario.ADMINISTRADOR) && !id.equals(user.getId())) {
-			throw new AuthorizationException("Acesso negado");
-		}
+//		UserSS user = UserService.authenticated();
+//		if( user==null || !user.hasRole(TipoUsuario.ADMINISTRADOR) && !id.equals(user.getId())) {
+//			throw new AuthorizationException("Acesso negado");
+//		}
 		
 		Optional<Dispositivo> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -51,7 +51,7 @@ public class DispositivoService {
 		try {
 			repo.deleteById(id);
 		} catch (DataIntegrityViolationException error) {
-			throw new DataIntegrityException("Não é possiel excluir uma Dispositivo que possui produtos");
+			throw new DataIntegrityException("Não é possiel excluir um Dispositivo");
 		}
 	}
 
