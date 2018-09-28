@@ -33,9 +33,10 @@ public class PessoaDTO implements Serializable {
 		id = obj.getId();
 		nome = obj.getNome();
 		email = obj.getEmail();
+		senha = obj.getSenha();
 
 	}
-
+	
 	public Long getId() {
 		return id;
 	}

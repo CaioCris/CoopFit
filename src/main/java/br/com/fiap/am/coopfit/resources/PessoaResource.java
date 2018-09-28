@@ -4,9 +4,12 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.fiap.am.coopfit.domain.Pessoa;
 import br.com.fiap.am.coopfit.dto.PessoaDTO;
+import br.com.fiap.am.coopfit.dto.PessoaNewDTO;
 import br.com.fiap.am.coopfit.services.PessoaService;
 
 //Voltar a Autenticação
@@ -34,27 +38,29 @@ public class PessoaResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Pessoa obj) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody PessoaNewDTO objDto) {
+		Pessoa obj = service.fromNewDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Pessoa obj) {
+	public ResponseEntity<Void> update(@Valid @PathVariable Long id, @RequestBody PessoaNewDTO objDto) {
+		Pessoa obj = service.fromNewDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 
-	// @PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 
-	// @PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<PessoaDTO>> findAll() {
 		List<Pessoa> list = service.findAll();
@@ -62,7 +68,7 @@ public class PessoaResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 
-	// @PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRADOR')")
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<PessoaDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,

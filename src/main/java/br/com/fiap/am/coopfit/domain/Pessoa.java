@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.fiap.am.coopfit.domain.enums.Genero;
 import br.com.fiap.am.coopfit.domain.enums.TipoUsuario;
+import br.com.fiap.am.coopfit.dto.PessoaNewDTO;
 
 @Entity
 @Table(name = "T_PESSOA")
@@ -43,7 +44,7 @@ public class Pessoa implements Serializable {
 	private byte[] foto;
 	@Column(name = "email", nullable = false)
 	private String email;
-//	@JsonIgnore
+	@JsonIgnore
 	@Column(name = "senha", nullable = false)
 	private String senha;
 	@Column(name = "dt_cadastro", nullable = false)
@@ -86,21 +87,26 @@ public class Pessoa implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa")
 	private List<Dispositivo> dispositivos = new ArrayList<>();
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa")
 	private List<DispositivoSensor> dispositivoSensores = new ArrayList<>();
 
 	public Pessoa() {
 		super();
+	}
+
+	public Pessoa(PessoaNewDTO objDto) {
+		super();
 		addPerfil(TipoUsuario.ADMINISTRADOR);
 	}
 
-	public Pessoa(Long id, String nome, String email) {
+	public Pessoa(Long id, String nome, String email, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+		this.senha = senha;
 	}
 
 	public Pessoa(String nome, Date nascimento, Integer genero, byte[] foto, String email, String senha, Integer tipo,
@@ -121,8 +127,8 @@ public class Pessoa implements Serializable {
 		addPerfil(TipoUsuario.ADMINISTRADOR);
 	}
 
-	public Pessoa(String nome, Date nascimento, Genero genero, String email, String senha,
-			Date cadastro, Date alteracao, boolean notificacao, double altura, double peso, String observacao) {
+	public Pessoa(String nome, Date nascimento, Genero genero, String email, String senha, Date cadastro,
+			Date alteracao, boolean notificacao, double altura, double peso, String observacao) {
 		super();
 		this.nome = nome;
 		this.nascimento = nascimento;
@@ -157,8 +163,7 @@ public class Pessoa implements Serializable {
 	}
 
 	public Pessoa(Long id, String nome, Date nascimento, Integer genero, byte[] foto, String email, String senha,
-			Integer tipo, Date cadastro, Date alteracao, boolean notificacao, double altura, double peso,
-			String observacao) {
+			Date cadastro, Date alteracao, boolean notificacao, double altura, double peso, String observacao) {
 		super();
 		this.id = id;
 		this.nome = nome;

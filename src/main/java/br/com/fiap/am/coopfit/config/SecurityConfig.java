@@ -1,4 +1,5 @@
 package br.com.fiap.am.coopfit.config;
+
 //Voltar a Autenticação
 import java.util.Arrays;
 
@@ -40,39 +41,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private JWTUtil jwtUtil;
 
 	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**" };
-	private static final String[] PUBLIC_MATCHERS_GET = { "/sensores/**", "/questionarios/**" 
-			//Voltar a Autenticação
-			, "/pessoas/**", 
-			"/rotinas/**", "/notificacoes/**", "/tratativas/**", 
-			"/informacoes_saude/**", "/dispositivos/**"};
-	
-	//private static final String[] PUBLIC_MATCHERS_POST = { "/pessoas/**", "/auth/forgot/**" };
-	private static final String[] PUBLIC_MATCHERS_POST = { "/sensores/**", "/questionarios/**" 
-			//Voltar a Autenticação
-			, "/pessoas/**", 
-			"/rotinas/**", "/notificacoes/**", "/tratativas/**", 
-			"/informacoes_saude/**", "/dispositivos/**"};
-	
-	private static final String[] PUBLIC_MATCHERS_PUT = { "/sensores/**", "/questionarios/**" 
-			//Voltar a Autenticação
-			, "/pessoas/**", 
-			"/rotinas/**", "/notificacoes/**", "/tratativas/**", 
-			"/informacoes_saude/**", "/dispositivos/**"};
+	private static final String[] PUBLIC_MATCHERS_GET = { "/sensores/**", "/questionarios/**" };
+
+	private static final String[] PUBLIC_MATCHERS_POST = { "/pessoas/**", "/auth/forgot/**" };
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**",
-				"/swagger-ui.html", "/webjars/**"	
-				//Voltar a Autenticação
-				,"/h2-console/**","/sensores/**", "/questionarios/**", "/pessoas/**", 
-				"/rotinas/**", "/notificacoes/**", "/tratativas/**", 
-				"/informacoes_saude/**", "/dispositivos/**",  "/auth/forgot/**");
+				"/swagger-ui.html", "/webjars/**");
 	}
-	
+
 //	,"/h2-console/**","/sensores/**", "/questionarios/**", "/pessoas/**", 
 //	"/rotinas/**", "/notificacoes/**", "/tratativas/**", 
 //	"/informacoes_saude/**", "/dispositivos/**",  "/auth/forgot/**"
-
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -82,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 
 		http.cors().and().csrf().disable();
-		http.authorizeRequests().antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll().antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_PUT).permitAll()
+		http.authorizeRequests().antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
 				.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll().antMatchers(PUBLIC_MATCHERS).permitAll()
 				.anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));

@@ -1,6 +1,5 @@
 package br.com.fiap.am.coopfit.services;
 
-//Voltar a Autenticação
 import java.util.List;
 import java.util.Optional;
 
@@ -9,12 +8,17 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.fiap.am.coopfit.domain.Pessoa;
+import br.com.fiap.am.coopfit.domain.enums.TipoUsuario;
 import br.com.fiap.am.coopfit.dto.PessoaDTO;
+import br.com.fiap.am.coopfit.dto.PessoaNewDTO;
 import br.com.fiap.am.coopfit.repositories.PessoaRepository;
+import br.com.fiap.am.coopfit.security.UserSS;
+import br.com.fiap.am.coopfit.services.exception.AuthorizationException;
 import br.com.fiap.am.coopfit.services.exception.DataIntegrityException;
 import br.com.fiap.am.coopfit.services.exception.ObjectNotFoundException;
 
@@ -24,12 +28,15 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository repo;
 
+	@Autowired
+	private BCryptPasswordEncoder pe;
+
 	public Pessoa find(Long id) {
 
-//		UserSS user = UserService.authenticated();
-//		if( user==null || !user.hasRole(TipoUsuario.ADMINISTRADOR) && !id.equals(user.getId())) {
-//			throw new AuthorizationException("Acesso negado");
-//		}
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(TipoUsuario.ADMINISTRADOR) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 
 		Optional<Pessoa> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -39,6 +46,10 @@ public class PessoaService {
 	@Transactional
 	public Pessoa insert(Pessoa obj) {
 		obj.setId(null);
+		System.out.println(obj.getNome());
+		System.out.println(obj.getEmail());
+		System.out.println(obj.getAlteracao());
+		System.out.println(obj.getCadastro());
 		return repo.save(obj);
 	}
 
@@ -67,7 +78,13 @@ public class PessoaService {
 	}
 
 	public Pessoa fromDTO(PessoaDTO objDto) {
-		return new Pessoa(objDto.getId(), objDto.getNome(), objDto.getEmail());
+		return new Pessoa(objDto.getId(), objDto.getNome(), objDto.getEmail(), pe.encode(objDto.getSenha()));
 	}
 
+	public Pessoa fromNewDTO(PessoaNewDTO objDto) {
+		return new Pessoa(objDto.getId(), objDto.getNome(), objDto.getNascimento(), objDto.getGenero(),
+				objDto.getFoto(), objDto.getEmail(), pe.encode(objDto.getSenha()), objDto.getCadastro(),
+				objDto.getAlteracao(), objDto.isNotificacao(), objDto.getAltura(), objDto.getPeso(),
+				objDto.getObservacao());
+	}
 }

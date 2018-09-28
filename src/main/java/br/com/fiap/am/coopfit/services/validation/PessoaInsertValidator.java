@@ -9,12 +9,12 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.fiap.am.coopfit.domain.Pessoa;
-import br.com.fiap.am.coopfit.dto.PessoaNewDTO;
+import br.com.fiap.am.coopfit.dto.PessoaDTO;
 import br.com.fiap.am.coopfit.repositories.PessoaRepository;
 import br.com.fiap.am.coopfit.resource.exception.FieldMessage;
 
 
-public class PessoaInsertValidator implements ConstraintValidator<PessoaInsert, PessoaNewDTO> {
+public class PessoaInsertValidator implements ConstraintValidator<PessoaInsert, PessoaDTO> {
 
 	@Autowired
 	private PessoaRepository PessoaRepo;
@@ -24,7 +24,7 @@ public class PessoaInsertValidator implements ConstraintValidator<PessoaInsert, 
 	}
 
 	@Override
-	public boolean isValid(PessoaNewDTO objDto, ConstraintValidatorContext context) {
+	public boolean isValid(PessoaDTO objDto, ConstraintValidatorContext context) {
 		List<FieldMessage> list = new ArrayList<>();
 
 		Pessoa aux =  PessoaRepo.findByEmail(objDto.getEmail());

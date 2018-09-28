@@ -57,7 +57,7 @@ public class QuestionarioService {
 		try {
 			repo.deleteById(id);
 		} catch (DataIntegrityViolationException error) {
-			throw new DataIntegrityException("Não é possiel excluir uma Questionario que possui produtos");
+			throw new DataIntegrityException("Não é possiel excluir uma Questionarios");
 		}
 	}
 
