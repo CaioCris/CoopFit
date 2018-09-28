@@ -71,4 +71,8 @@ public class DispositivoSensorService {
 		return new DispositivoSensor(objDto.getId(), objDto.getValor(), objDto.getTipo());
 	}
 
+	public double maxValue(Long id, String tipo) {
+		return repo.maxValue(id, tipo);
+	}
+	
 }

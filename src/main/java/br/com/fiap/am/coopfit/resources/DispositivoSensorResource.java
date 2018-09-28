@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.fiap.am.coopfit.domain.DispositivoSensor;
 import br.com.fiap.am.coopfit.dto.DispositivoSensorDTO;
+import br.com.fiap.am.coopfit.resource.utils.URL;
 import br.com.fiap.am.coopfit.services.DispositivoSensorService;
 
 @RestController
@@ -69,6 +70,18 @@ public class DispositivoSensorResource {
 		Page<DispositivoSensor> list = service.findPage(page, linesPerPage, orderBy, direction);
 		Page<DispositivoSensorDTO> listDTO = list.map(obj -> new DispositivoSensorDTO(obj));
 		return ResponseEntity.ok().body(listDTO);
+	}
+
+	@RequestMapping(value = "/maximo", method = RequestMethod.GET)
+	public ResponseEntity<Double> findPage(
+			@RequestParam(value = "id", defaultValue = "0") Long id,
+			@RequestParam(value = "tipo", defaultValue = "Sono") String tipo) {
+		Long idDecoded = (id);
+		String tipoDecoded = URL.decodeParam(tipo);
+		double value = service.maxValue(idDecoded, tipoDecoded);
+		//Page<DispositivoSensor> list = service.findPage(page, linesPerPage, orderBy, direction);
+		//Page<DispositivoSensorDTO> listDTO = list.map(obj -> new DispositivoSensorDTO(obj));
+		return ResponseEntity.ok().body(value);
 	}
 
 }
