@@ -84,7 +84,6 @@ public class Pessoa implements Serializable {
 	@OneToMany(mappedBy = "pessoa")
 	private List<Questionario> questionarios = new ArrayList<>();
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa")
 	private List<Dispositivo> dispositivos = new ArrayList<>();
 
