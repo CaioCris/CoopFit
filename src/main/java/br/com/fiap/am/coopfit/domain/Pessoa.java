@@ -49,7 +49,7 @@ public class Pessoa implements Serializable {
 	private String senha;
 	@Column(name = "dt_cadastro", nullable = false)
 	private Date cadastro;
-	@Column(name = "dt_alteracao", nullable = false)
+	@Column(name = "dt_alteracao")
 	private Date alteracao;
 	@Column(name = "recebe_notificacao", nullable = false)
 	private boolean notificacao;

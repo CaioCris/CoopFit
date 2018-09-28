@@ -57,7 +57,7 @@ public class DBService {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 		Pessoa p1 = new Pessoa("Caio", sdf.parse("01/09/1993 00:00"), Genero.MASCULINO, "caiohcris@gmail.com",
-				pe.encode("123456"), sdf.parse("11/08/2018 23:46"), sdf.parse("12/08/2018 20:45"), false, 1.73, 78.5,
+				pe.encode("123456"), sdf.parse("11/08/2018 23:46"), null, false, 1.73, 78.5,
 				"Não tenho Observações");
 		p1.addPerfil(TipoUsuario.ADMINISTRADOR);
 		
